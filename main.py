@@ -2,9 +2,6 @@ import questionary
 import requests
 from datetime import datetime
 import subprocess
-import re
-from tqdm import tqdm
-import sys
 
 
 def human_format(num: int) -> str:
@@ -47,7 +44,7 @@ def download_video(
     if dir:
         output = f"{dir}/{output}"
 
-    process = subprocess.Popen(
+    subprocess.run(
         [
             "ffmpeg",
             "-i",
@@ -61,19 +58,8 @@ def download_video(
             "-nostats",
             output,
         ],
-        stdout=subprocess.PIPE,
-        stderr=subprocess.STDOUT,
-        universal_newlines=True,
     )
 
-    duration_pattern = re.compile(r"Duration: (\d+):(\d+):(\d+\.\d+)")
-    time_pattern = re.compile(r"time=(\d+):(\d+):(\d+\.\d+)")
-
-    duration_in_seconds = None
-    progress_bar = None
-
-    for line in process.stdout:
-        print(line, end="")
 
 
 def get_videos() -> None:
