@@ -61,7 +61,6 @@ def download_video(
     )
 
 
-
 def get_videos() -> None:
     datas = []
 
@@ -126,6 +125,8 @@ def get_videos() -> None:
         exit()
 
     video = datas[idxVideo]
+
+    print(video)
 
     sourceChoices = [
         f"{video['sources'].index(source) + 1}. {source['resolution']} - {source['videoUrl']}"
